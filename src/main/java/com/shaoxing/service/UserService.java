@@ -1,6 +1,6 @@
 package com.shaoxing.service;
 
-import com.shaoxing.pojo.User;
+import com.shaoxing.entity.User;
 
 public interface UserService {
 	User findUserByName(String userName);

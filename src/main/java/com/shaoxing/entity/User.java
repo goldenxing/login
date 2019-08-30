@@ -1,4 +1,4 @@
-package com.shaoxing.pojo;
+package com.shaoxing.entity;
 
 import java.io.Serializable;
 import java.util.List;

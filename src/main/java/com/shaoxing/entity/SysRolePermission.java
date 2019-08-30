@@ -1,4 +1,4 @@
-package com.shaoxing.pojo;
+package com.shaoxing.entity;
 
 public class SysRolePermission {
 	private Integer permissionId;
