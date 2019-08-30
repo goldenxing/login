@@ -3,14 +3,20 @@ package com.shaoxing.conf;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.shaoxing.entity.User;
+import com.shaoxing.service.UserService;
 
 public class UserRealm extends AuthorizingRealm{
 	@Autowired
-	
+	private UserService userService;
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// TODO Auto-generated method stub
@@ -31,8 +37,14 @@ public class UserRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// TODO Auto-generated method stub
 		String userName = (String) token.getPrincipal();
-		String password = 
-		return null;
+		User user = userService.findUserByName(userName);
+		if(user==null) {
+			//用户不存在就抛出异常
+            throw new UnknownAccountException();
+		}
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassWord(),ByteSource.Util.bytes(user.getSalt()),
+                getName());
+		return authenticationInfo;
 	}
 
 }

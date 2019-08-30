@@ -3,9 +3,9 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 
-<mapper namespace="com.shaoxing.repository.SysPermissionMapper">
+<mapper namespace="com.shaoxing.mapper.SysPermissionMapper">
 
-	<resultMap id="RM_SysPermission" type="com.shaoxing.entity.mysql.SysPermission">
+	<resultMap id="RM_SysPermission" type="com.shaoxing.entity.SysPermission">
         <result property="id" column="id"/>
         <result property="available" column="available"/>
         <result property="name" column="name"/>

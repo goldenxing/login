@@ -3,9 +3,9 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 
-<mapper namespace="com.shaoxing.repository.SysRoleMapper">
+<mapper namespace="com.shaoxing.mapper.SysRoleMapper">
 
-	<resultMap id="RM_SysRole" type="com.shaoxing.entity.mysql.SysRole">
+	<resultMap id="RM_SysRole" type="com.shaoxing.entity.SysRole">
         <result property="id" column="id"/>
         <result property="available" column="available"/>
         <result property="description" column="description"/>
