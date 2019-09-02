@@ -10,6 +10,7 @@ package com.shaoxing.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shaoxing.entity.User;
@@ -75,5 +76,5 @@ public interface UserMapper{
 	 * @return 
 	 * @since JDK 1.8
 	 */
-	Integer register(String name,String userName,String md5Password,Integer state);
+	Integer register(@Param("name")String name,@Param("userName")String userName,@Param("md5Password")String md5Password,@Param("state")Integer state);
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shaoxing.service.UserService;
+import com.shaoxing.service.impl.UserServiceImpl;
 import com.shaoxing.view.JsonResult;
 
 @Controller
@@ -19,7 +20,7 @@ public class RegisterController {
 	@PostMapping(value ="/register")
 	public JsonResult register(@RequestParam("userName")String userName,@RequestParam("passWord")String passWord,
 			@RequestParam("name")String name,@RequestParam("passWordVerify")String passWordVerify){
-		if(passWord != passWordVerify) {
+		if(!passWord.equals(passWordVerify)) {
 			return JsonResult.error("两次输入密码不一致，请重新输入");
 		}
 		if(userName!=null&&userName!=""&&passWord!=null&&passWord!="") {
