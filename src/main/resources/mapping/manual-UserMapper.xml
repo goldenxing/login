@@ -5,5 +5,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 <!-- 存放手写的sql -->
 <mapper namespace="com.shaoxing.mapper.UserMapper">
-	
+	<select id="findUserByName" resultMap="RM_User">
+		SELECT * FROM user WHERE userName = #{userName};
+	</select>
+	<insert id="register" >
+		INSERT INTO user(name,userName,password)VALUES(#{userName},#{name},#{md5PassWord},0);
+	</insert>
 </mapper>

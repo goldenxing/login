@@ -10,9 +10,13 @@ package com.shaoxing.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.shaoxing.entity.User;
 
 
+
+@Repository
 public interface UserMapper{
 	/**
 	 * 新增
@@ -54,4 +58,22 @@ public interface UserMapper{
 	 * @return
 	 */
 	//PageList<User> findPage(Map<String, Object> param, PageBounds pageBounds);
+	/** 
+	 * .根据用户名查询用户信息. <br/>  
+	 * @date: 2019年8月31日 上午10:06:27.<br/>
+	 * @author 金光闪闪钻石醒
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	User findUserByName(String userName);
+	/** 
+	 * .注册. <br/> 
+	 * @date: 2019年9月2日 上午10:21:43.<br/>
+	 * @author 金光闪闪钻石醒 
+	 * @param userName
+	 * @param md5Password
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	Integer register(String name,String userName,String md5Password,Integer state);
 }

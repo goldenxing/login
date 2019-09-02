@@ -10,9 +10,12 @@ package com.shaoxing.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.shaoxing.entity.SysRole;
 
 
+@Repository
 public interface SysRoleMapper{
 	/**
 	 * 新增
