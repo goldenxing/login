@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
+<head>
+    <meta charset="UTF-8" />
+    <title>注册界面</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script type="text/javascript"  th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript">
+
+ $(function(){ 
+	 $("#register").click(function(){ 
+		 $.ajax({
+			url:"/rest/register",
+			type:"post",
+			data:{
+				userName : $('#userName').val(),
+				name : $('#name').val(),
+				passWord : $('#passWord').val(),
+				passWordVerify : $('#passWordVerify').val()
+			},
+			success:function (data) {
+				console.log(data)
+				if(data.code === 10000){
+					alert(data.msg);
+				}
+				if(data.code === 10002){
+					alert(data.msg);
+				}
+			},
+			error:function (data){
+				alert("系统异常");
+			}
+		}); 
+ 	});
+}) 
+</script>
+</head>
+<body class="container" style="width: 60%">
+<br><br><br><br><br>
+<form class="form-group">
+	<label for="user_name">账号</label>
+ 	<input class="form-control" type="text" name="userName" id="userName"/>
+ 	<label for="name">昵称</label>
+    <input class="form-control" type="text" name="name" id="name">
+    <label for="password">密码</label>
+    <input class="form-control" type="password" name="passWord" id="passWord"/>
+    <label for="passWordVerify">密码确认</label>
+    <input class="form-control" type="password"name="passWordVerify" id="passWordVerify">
+	<input type="button" value="注册" class="btn btn-success" id="register">
+</form>
+</body>
+</html>

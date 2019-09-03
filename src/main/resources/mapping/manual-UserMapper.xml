@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- 存放手写的sql -->
+<mapper namespace="com.shaoxing.mapper.UserMapper">
+	<select id="findUserByName" resultMap="RM_User">
+		SELECT * FROM user WHERE userName = #{userName};
+	</select>
+	<insert id="register" >
+		INSERT INTO user(name,userName,password,state)VALUES(#{name},#{userName},#{md5PassWord},#{state});
+	</insert>
+</mapper>

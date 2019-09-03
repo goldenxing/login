@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.shaoxing.mapper.SysPermissionMapper">
+
+	<resultMap id="RM_SysPermission" type="com.shaoxing.entity.SysPermission">
+        <result property="id" column="id"/>
+        <result property="available" column="available"/>
+        <result property="name" column="name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="parentIds" column="parent_ids"/>
+        <result property="permission" column="permission"/>
+        <result property="resourceType" column="resource_type"/>
+        <result property="url" column="url"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+		id,available,name,parent_id,parent_ids,permission,resource_type,url
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO sys_permission (
+        	id ,
+        	available ,
+        	name ,
+        	parent_id ,
+        	parent_ids ,
+        	permission ,
+        	resource_type ,
+        	url 
+        ) VALUES (
+        	#{id} ,
+        	#{available} ,
+        	#{name} ,
+        	#{parentId} ,
+        	#{parentIds} ,
+        	#{permission} ,
+        	#{resourceType} ,
+        	#{url} 
+        )
+    ]]>
+	</insert>
+    
+	<update id="update" >
+    <![CDATA[
+        UPDATE sys_permission SET
+	        available = #{available} ,
+	        name = #{name} ,
+	        parent_id = #{parentId} ,
+	        parent_ids = #{parentIds} ,
+	        permission = #{permission} ,
+	        resource_type = #{resourceType} ,
+	        url = #{url} 
+        WHERE 
+	        id = #{id} 
+    ]]>
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM sys_permission WHERE
+        id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="RM_SysPermission">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM sys_permission 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="findPage_where">
+		<where>	      				
+	       <if test="id != null">
+				AND id = #{id}
+			</if>
+	       <if test="available != null">
+				AND available = #{available}
+			</if>
+	       <if test="name != null">
+				AND name = #{name}
+			</if>
+	       <if test="parentId != null">
+				AND parent_id = #{parentId}
+			</if>
+	       <if test="parentIds != null">
+				AND parent_ids = #{parentIds}
+			</if>
+	       <if test="permission != null">
+				AND permission = #{permission}
+			</if>
+	       <if test="resourceType != null">
+				AND resource_type = #{resourceType}
+			</if>
+	       <if test="url != null">
+				AND url = #{url}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="count" resultType="long">
+        SELECT count(id) FROM sys_permission 
+		<include refid="findPage_where"/>    
+    </select>
+
+    <select id="findAll" resultMap="RM_SysPermission">
+    SELECT <include refid="columns"/> FROM sys_permission where 1=1
+    </select>
+
+    <select id="findPage" resultMap="RM_SysPermission">
+    	SELECT <include refid="columns" />
+	    FROM sys_permission 
+		<include refid="findPage_where"/>
+    </select>
+
+	
+</mapper>
+

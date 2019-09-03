@@ -1,0 +1,27 @@
+spring:
+  datasource: 
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.0.21.108:3306/yl_cxk
+      username: root
+      password: root
+  thymeleaf:
+      cache: false
+      check-template-location: true
+      enabled: true
+      encoding: utf-8
+      mode: HTML5
+      prefix: classpath:/templates/
+      suffix: .html
+      servlet:
+        content-type: text/html
+  cache:
+        ehcache:
+          config:  classpath:/ehcache.xml
+mybatis:
+  mapper-locations:  classpath:mapping/*.xml
+  type-aliases-package: com.shaoxing.entity
+#logging:
+# 打印sql
+#  level:
+#    com.example.demo.dao : debug
+#     com.example.demo.controller: debug       

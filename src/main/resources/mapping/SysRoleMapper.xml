@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.shaoxing.mapper.SysRoleMapper">
+
+	<resultMap id="RM_SysRole" type="com.shaoxing.entity.SysRole">
+        <result property="id" column="id"/>
+        <result property="available" column="available"/>
+        <result property="description" column="description"/>
+        <result property="role" column="role"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+		id,available,description,role
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO sys_role (
+        	id ,
+        	available ,
+        	description ,
+        	role 
+        ) VALUES (
+        	#{id} ,
+        	#{available} ,
+        	#{description} ,
+        	#{role} 
+        )
+    ]]>
+	</insert>
+    
+	<update id="update" >
+    <![CDATA[
+        UPDATE sys_role SET
+	        available = #{available} ,
+	        description = #{description} ,
+	        role = #{role} 
+        WHERE 
+	        id = #{id} 
+    ]]>
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM sys_role WHERE
+        id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="RM_SysRole">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM sys_role 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="findPage_where">
+		<where>	      				
+	       <if test="id != null">
+				AND id = #{id}
+			</if>
+	       <if test="available != null">
+				AND available = #{available}
+			</if>
+	       <if test="description != null">
+				AND description = #{description}
+			</if>
+	       <if test="role != null">
+				AND role = #{role}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="count" resultType="long">
+        SELECT count(id) FROM sys_role 
+		<include refid="findPage_where"/>    
+    </select>
+
+    <select id="findAll" resultMap="RM_SysRole">
+    SELECT <include refid="columns"/> FROM sys_role where 1=1
+    </select>
+
+    <select id="findPage" resultMap="RM_SysRole">
+    	SELECT <include refid="columns" />
+	    FROM sys_role 
+		<include refid="findPage_where"/>
+    </select>
+
+	
+</mapper>
+

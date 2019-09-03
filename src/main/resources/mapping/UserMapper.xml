@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.shaoxing.mapper.UserMapper">
+
+	<resultMap id="RM_User" type="com.shaoxing.entity.User">
+        <result property="uid" column="uid"/>
+        <result property="userName" column="userName"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="salt" column="salt"/>
+        <result property="state" column="state"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+		uid,userName,name,password,salt,state
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="uid">
+    <![CDATA[
+        INSERT INTO user (
+        	uid ,
+        	userName ,
+        	name ,
+        	password ,
+        	salt ,
+        	state 
+        ) VALUES (
+        	#{uid} ,
+        	#{userName} ,
+        	#{name} ,
+        	#{password} ,
+        	#{salt} ,
+        	#{state} 
+        )
+    ]]>
+	</insert>
+    
+	<update id="update" >
+    <![CDATA[
+        UPDATE user SET
+	        userName = #{userName} ,
+	        name = #{name} ,
+	        password = #{password} ,
+	        salt = #{salt} ,
+	        state = #{state} 
+        WHERE 
+	        uid = #{uid} 
+    ]]>
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM user WHERE
+        uid = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="RM_User">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM user 
+	        WHERE 
+		        uid = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="findPage_where">
+		<where>	      				
+	       <if test="uid != null">
+				AND uid = #{uid}
+			</if>
+	       <if test="userName != null">
+				AND userName = #{userName}
+			</if>
+	       <if test="name != null">
+				AND name = #{name}
+			</if>
+	       <if test="password != null">
+				AND password = #{password}
+			</if>
+	       <if test="salt != null">
+				AND salt = #{salt}
+			</if>
+	       <if test="state != null">
+				AND state = #{state}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="count" resultType="long">
+        SELECT count(id) FROM user 
+		<include refid="findPage_where"/>    
+    </select>
+
+    <select id="findAll" resultMap="RM_User">
+    SELECT <include refid="columns"/> FROM user where 1=1
+    </select>
+
+    <select id="findPage" resultMap="RM_User">
+    	SELECT <include refid="columns" />
+	    FROM user 
+		<include refid="findPage_where"/>
+    </select>
+
+	
+</mapper>
+
