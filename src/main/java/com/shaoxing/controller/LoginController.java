@@ -10,24 +10,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shaoxing.service.impl.UserServiceImpl;
+import com.shaoxing.service.UserService;
 
 @Controller
 @RequestMapping
 public class LoginController {
 	@Autowired
-	private UserServiceImpl userServiceImpl;
-
-	@GetMapping(value = "login")
-	public String loginForm() {
-		return "login";
-	}
+	private UserService userService;
 
 	@PostMapping(value = "/loginRest")
 	public String loginRest(@RequestParam("userName") String userName, @RequestParam("passWord") String passWord) {
 		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName, passWord);
 		Subject subject = SecurityUtils.getSubject();
 		subject.login(usernamePasswordToken);
-		return "login";
+		System.out.println("end");
+		return "index";
 	}
 }

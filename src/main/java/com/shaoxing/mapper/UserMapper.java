@@ -66,7 +66,7 @@ public interface UserMapper{
 	 * @return 
 	 * @since JDK 1.8
 	 */
-	User findUserByName(String userName);
+	User findUserByUserName(String userName);
 	/** 
 	 * .注册. <br/> 
 	 * @date: 2019年9月2日 上午10:21:43.<br/>
@@ -77,4 +77,13 @@ public interface UserMapper{
 	 * @since JDK 1.8
 	 */
 	Integer register(@Param("name")String name,@Param("userName")String userName,@Param("md5PassWord")String md5PassWord,@Param("state")Integer state);
+	/** 
+	 * .根据用户名查密码. <br/> 
+	 * @date: 2019年9月3日 下午4:51:04.<br/>
+	 * @author 金光闪闪钻石醒 
+	 * @param userName
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	String findpassWordByUserName(String userName);
 }

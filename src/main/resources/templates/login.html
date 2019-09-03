@@ -8,15 +8,13 @@
 <script type="text/javascript">
 
  $(function(){ 
-	 $("#register").click(function(){ 
+	 $("#login").click(function(){ 
 		 $.ajax({
-			url:"/rest/register",
+			url:"/loginRest",
 			type:"post",
 			data:{
 				userName : $('#userName').val(),
-				name : $('#name').val(),
 				passWord : $('#passWord').val(),
-				passWordVerify : $('#passWordVerify').val()
 			},
 			success:function (data) {
 				console.log(data)

@@ -7,9 +7,9 @@
 
 	<resultMap id="RM_User" type="com.shaoxing.entity.User">
         <result property="uid" column="uid"/>
-        <result property="userName" column="userName"/>
+        <result property="userName" column="user_name"/>
         <result property="name" column="name"/>
-        <result property="password" column="password"/>
+        <result property="passWord" column="pass_word"/>
         <result property="salt" column="salt"/>
         <result property="state" column="state"/>
 	</resultMap>
@@ -17,7 +17,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="columns">
 	    <![CDATA[
-		uid,userName,name,password,salt,state
+		uid,userName,name,passWord,salt,state
 	    ]]>
 	</sql>
 
@@ -28,14 +28,14 @@
         	uid ,
         	userName ,
         	name ,
-        	password ,
+        	passWord ,
         	salt ,
         	state 
         ) VALUES (
         	#{uid} ,
         	#{userName} ,
         	#{name} ,
-        	#{password} ,
+        	#{passWord} ,
         	#{salt} ,
         	#{state} 
         )
@@ -47,7 +47,7 @@
         UPDATE user SET
 	        userName = #{userName} ,
 	        name = #{name} ,
-	        password = #{password} ,
+	        passWord = #{passWord} ,
 	        salt = #{salt} ,
 	        state = #{state} 
         WHERE 
@@ -82,8 +82,8 @@
 	       <if test="name != null">
 				AND name = #{name}
 			</if>
-	       <if test="password != null">
-				AND password = #{password}
+	       <if test="passWord != null">
+				AND passWord = #{passWord}
 			</if>
 	       <if test="salt != null">
 				AND salt = #{salt}

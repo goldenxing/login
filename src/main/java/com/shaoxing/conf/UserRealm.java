@@ -37,12 +37,12 @@ public class UserRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// TODO Auto-generated method stub
 		String userName = (String) token.getPrincipal();
-		User user = userService.findUserByName(userName);
+		User user = userService.findUserByUserName(userName);
 		if(user==null) {
 			//用户不存在就抛出异常
             throw new UnknownAccountException();
 		}
-		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassWord(),ByteSource.Util.bytes(user.getSalt()),
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPassWord(), ByteSource.Util.bytes(userName),
                 getName());
 		return authenticationInfo;
 	}
