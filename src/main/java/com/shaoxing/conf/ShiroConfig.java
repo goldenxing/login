@@ -35,7 +35,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/signup/record", "user");
 		filterChainDefinitionMap.put("/**", "anon");*/
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		shiroFilterFactoryBean.setLoginUrl("/login/tologin");
+		shiroFilterFactoryBean.setLoginUrl("/login");
 		// 登录成功后要跳转的链接
 		shiroFilterFactoryBean.setSuccessUrl("/index");
 		// 未授权界面;
@@ -54,6 +54,7 @@ public class ShiroConfig {
 	@Bean
 	public UserRealm userRealm() {
 		UserRealm userRealm = new UserRealm();
+		userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
 		return userRealm;
 	}
 

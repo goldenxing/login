@@ -17,7 +17,11 @@ import com.shaoxing.service.UserService;
 public class LoginController {
 	@Autowired
 	private UserService userService;
-
+	@GetMapping(value = "/toLogin")
+	public String toLogin() {
+		return "login";
+		
+	}
 	@PostMapping(value = "/loginRest")
 	public String loginRest(@RequestParam("userName") String userName, @RequestParam("passWord") String passWord) {
 		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName, passWord);
