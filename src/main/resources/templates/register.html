@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
 <head>
     <meta charset="UTF-8" />
-    <title>登录界面</title>
+    <title>注册界面</title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <script type="text/javascript"  th:src="@{/js/jquery-3.3.1.min.js}"></script>
 <script type="text/javascript">
@@ -40,13 +40,13 @@
 <form class="form-group">
 	<label for="user_name">账号</label>
  	<input class="form-control" type="text" name="userName" id="userName"/>
+ 	<label for="name">昵称</label>
+    <input class="form-control" type="text" name="name" id="name">
     <label for="password">密码</label>
     <input class="form-control" type="password" name="passWord" id="passWord"/>
-    <div class="checkbox">
-        <label> <input type="checkbox" id="isRememberMe" name="isRememberMe">记住我 </label>
-        <a th:href="@{/rest/toRegister}">还没账号？去注册</a>
-    </div>
-	<input type="button" value="登录" class="btn btn-success" id="login">
+    <label for="passWordVerify">密码确认</label>
+    <input class="form-control" type="password"name="passWordVerify" id="passWordVerify">
+	<input type="button" value="注册" class="btn btn-success" id="register">
 </form>
 </body>
 </html>

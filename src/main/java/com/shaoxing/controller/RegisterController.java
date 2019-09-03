@@ -1,15 +1,14 @@
 package com.shaoxing.controller;
 
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shaoxing.service.UserService;
-import com.shaoxing.service.impl.UserServiceImpl;
 import com.shaoxing.view.JsonResult;
 
 @Controller
@@ -17,6 +16,11 @@ import com.shaoxing.view.JsonResult;
 public class RegisterController {
 	@Autowired
 	private UserService userService;
+	@GetMapping(value = "/toRegister")
+	public String registerForm() {
+		return "register";
+	}
+	@ResponseBody
 	@PostMapping(value ="/register")
 	public JsonResult register(@RequestParam("userName")String userName,@RequestParam("passWord")String passWord,
 			@RequestParam("name")String name,@RequestParam("passWordVerify")String passWordVerify){

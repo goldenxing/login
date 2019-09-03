@@ -9,6 +9,6 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		SELECT * FROM user WHERE userName = #{userName};
 	</select>
 	<insert id="register" >
-		INSERT INTO user(name,userName,password)VALUES(#{userName},#{name},#{md5PassWord},0);
+		INSERT INTO user(name,userName,password,state)VALUES(#{name},#{userName},#{md5PassWord},#{state});
 	</insert>
 </mapper>

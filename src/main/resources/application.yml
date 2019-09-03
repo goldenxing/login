@@ -18,7 +18,7 @@ spring:
         ehcache:
           config:  classpath:/ehcache.xml
 mybatis:
-  mapper-locations:  classpath:mapper/*.xml
+  mapper-locations:  classpath:mapping/*.xml
   type-aliases-package: com.shaoxing.entity
 #logging:
 # 打印sql

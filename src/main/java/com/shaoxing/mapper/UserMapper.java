@@ -76,5 +76,5 @@ public interface UserMapper{
 	 * @return 
 	 * @since JDK 1.8
 	 */
-	Integer register(@Param("name")String name,@Param("userName")String userName,@Param("md5Password")String md5Password,@Param("state")Integer state);
+	Integer register(@Param("name")String name,@Param("userName")String userName,@Param("md5PassWord")String md5PassWord,@Param("state")Integer state);
 }
