@@ -57,4 +57,13 @@ public interface SysRoleMapper{
 	 * @return
 	 */
 	//PageList<SysRole> findPage(Map<String, Object> param, PageBounds pageBounds);
+	/** 
+	 * .根据角色id查找角色. <br/> 
+	 * @date: 2019年9月4日 下午6:22:45.<br/>
+	 * @author 金光闪闪钻石醒 
+	 * @param roleId
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	SysRole findRoleByRoleId(Integer roleId);
 }

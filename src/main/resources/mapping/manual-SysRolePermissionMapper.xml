@@ -5,5 +5,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 <!-- 存放手写的sql -->
 <mapper namespace="com.shaoxing.mapper.SysRolePermissionMapper">
-	
+	<select id="findPermissionIdByRoleId" resultType="java.lang.Integer">
+	select permission_id from sys_role_permission where role_id = #{roleId}
+	</select>
 </mapper>

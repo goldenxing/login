@@ -57,4 +57,5 @@ public interface SysPermissionMapper{
 	 * @return
 	 */
 	//PageList<SysPermission> findPage(Map<String, Object> param, PageBounds pageBounds);
+	List<Integer> findPermissionIdByRoleId(Integer roleId);
 }

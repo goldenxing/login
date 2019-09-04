@@ -1,24 +1,58 @@
 package com.shaoxing.conf;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.shaoxing.entity.SysRole;
+import com.shaoxing.entity.SysUserRole;
 import com.shaoxing.entity.User;
+import com.shaoxing.mapper.SysPermissionMapper;
+import com.shaoxing.service.RoleService;
 import com.shaoxing.service.UserService;
 
 public class UserRealm extends AuthorizingRealm{
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
+	/** 
+	 * 账号授权 <br/> 
+	 * @date: 2019年8月29日 下午10:00:37.<br/>
+	 * @author 金光闪闪钻石醒
+	 
+	 * @param token
+	 * @return
+	 * @throws AuthenticationException 
+	 * @since JDK 1.8
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		String userName = (String) principals.getPrimaryPrincipal();
+		Integer userId = userService.findUserIdByUserName(userName);
+		List<SysUserRole>roleIdList=userService.findRoleIdByUserId(userId);
+		List<SysRole>roleList = new ArrayList<>();
+		List<Integer>  pemissionIdList=new ArrayList<>();
+		for (SysUserRole sysUserRole : roleIdList) {
+			 int roleId=sysUserRole.getRoleId();
+			roleList.add(roleService.findRoleByRoleId(roleId));
+			//将所有权限放进list中
+			pemissionIdList.addAll(roleService.findPermissionIdByRoleId(roleId));
+		}
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -14,4 +14,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<select id="findpassWordByUserName" resultType="java.lang.String">
 		SELECT pass_word FROM user WHERE user_name = #{userName};
 	</select>
+	<select id="findUserIdByUserName" resultType="java.lang.Integer">
+		SELECT uid FROM user WHERE user_name = #{userName};
+	</select>
 </mapper>

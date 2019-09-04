@@ -1,11 +1,6 @@
 package com.shaoxing.mapper;
 
 
-/**
- * @author Nicolas.
- * @version 1.0
- * @since 1.0
- */
 
 import java.util.List;
 import java.util.Map;
@@ -86,4 +81,13 @@ public interface UserMapper{
 	 * @since JDK 1.8
 	 */
 	String findpassWordByUserName(String userName);
+	/** 
+	 * .根据用户名查用户id. <br/> 
+	 * @date: 2019年9月4日 下午4:13:55.<br/>
+	 * @author 金光闪闪钻石醒 
+	 * @param userName
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	Integer findUserIdByUserName(String userName);
 }

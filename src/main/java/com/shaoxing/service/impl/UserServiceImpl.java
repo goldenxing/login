@@ -1,16 +1,22 @@
 package com.shaoxing.service.impl;
 
+import java.util.List;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shaoxing.entity.SysUserRole;
 import com.shaoxing.entity.User;
+import com.shaoxing.mapper.SysUserRoleMapper;
 import com.shaoxing.mapper.UserMapper;
 import com.shaoxing.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private SysUserRoleMapper sysUserRoleMapper;
 	@Override
 	public User findUserByUserName(String userName) {
 		// TODO Auto-generated method stub
@@ -65,5 +71,34 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.findpassWordByUserName(userName);
 	}
+
+	/** 
+	 * .根据用户名查用户id. <br/> 
+	 * @date: 2019年9月3日 下午4:51:04.<br/>
+	 * @author 金光闪闪钻石醒 
+	 * @param userName
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	@Override
+	public Integer findUserIdByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return userMapper.findUserIdByUserName(userName);
+	}
+
+	/** 
+	 * .根据用户id查角色id. <br/> 
+	 * @date: 2019年9月3日 下午4:51:04.<br/>
+	 * @author 金光闪闪钻石醒 
+	 * @param userName
+	 * @return 
+	 * @since JDK 1.8
+	 */
+	@Override
+	public List<SysUserRole> findRoleIdByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return sysUserRoleMapper.findRoleIdByUserId(userId);
+	}
+	
 
 }

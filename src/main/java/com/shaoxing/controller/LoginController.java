@@ -38,7 +38,6 @@ public class LoginController {
 		}catch (UnknownAccountException uae) {
 			return JsonResult.error("用户不存在");
         }
-		System.out.println("end");
 		return JsonResult.success("登录成功！");
 	}
 }

@@ -5,5 +5,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 <!-- 存放手写的sql -->
 <mapper namespace="com.shaoxing.mapper.SysRoleMapper">
-	
+	<select id="findRoleByRoleId" resultMap="RM_SysRole">
+		select * from sys_role where id = #{roleId}
+	</select>
 </mapper>
